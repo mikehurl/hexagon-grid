@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 
 const Hexagon = styled.div`
   background: cadetblue;
+  cursor: pointer;
   width: 17vw; 
   height: 15vw;
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
@@ -48,7 +49,7 @@ const InnerWrapper = styled.div`
 	max-width: 50%;
 	height: 100%;
 	line-height: 1;
-	color: #ffffff;
+	color: #e9e9e7;
   text-align: center;
   font-size: 50%;
 
@@ -60,57 +61,32 @@ const InnerWrapper = styled.div`
   }
 `
 
+const resources = [
+  { type: 'Book' },
+  { type: 'Online Course' },
+  { type: 'Article' },
+  { type: 'Mentor' },
+  { type: 'Course' },
+  { type: 'Book' },
+  { type: 'Online Course' },
+  { type: 'Article' }
+]
+
 class App extends Component {
+  handleClick = () => console.log('click')
+
   render() {
     return (
       <Fragment>
         <GlobalStyle />
         <Wrapper>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Book</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Online Course</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Article</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Mentor</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Course</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Book</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Online Course</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Article</h3>
-            </InnerWrapper>
-          </Hexagon>
-          <Hexagon>
-            <InnerWrapper>
-              <h3>Mentor</h3>
-            </InnerWrapper>
-          </Hexagon>
+          {resources.map((resource, index) => (
+            <Hexagon key={index} onClick={this.handleClick}>
+              <InnerWrapper>
+                <h3>{resource.type}</h3>
+              </InnerWrapper>
+            </Hexagon>
+          ))}
         </Wrapper>
       </Fragment>
     );
