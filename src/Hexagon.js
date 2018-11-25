@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background: cadetblue;
+const Wrapper = styled.button`
+  background: ${props => {
+    if (props.type === 'Book') {
+      return '#3183c8'
+    }
+    if (props.type === 'Online Course') {
+      return '#b8c4ce'
+    }
+    if (props.type === 'Article') {
+      return '#38c172'
+    }
+    if (props.type === 'Mentor') {
+      return '#f4ca64'
+    }
+    // type === 'Course
+    return '#dc3030'
+  }};
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
   margin-right: 8vw;
   color: #ffffff;
@@ -25,14 +40,34 @@ const Wrapper = styled.div`
     width: 25%;
   }
 
-  :hover {
+  :disabled {
+    opacity: 0.5;
+  }
+
+  :hover:not(:disabled) {
+    background: ${props => {
+    if (props.type === 'Book') {
+      return '#2368a2'
+    }
+    if (props.type === 'Online Course') {
+      return '#8895a7'
+    }
+    if (props.type === 'Article') {
+      return '#259d58'
+    }
+    if (props.type === 'Mentor') {
+      return '#caa53d'
+    }
+    // type === 'Course
+    return '#b82020'
+  }};
     transform: scale(1.1);
 		transform-origin: 50%;
   }
 `
 
 const InnerWrapper = styled.div`
-  color: #e9e9e7;
+  color: #212934;
   display: flex;
 	flex-direction: column;
   flex-wrap: nowrap;
@@ -46,18 +81,34 @@ const InnerWrapper = styled.div`
   @media only screen and (min-width: 415px) {
     font-size: 75%;
   }
-  
+
   @media only screen and (min-width: 768px) {
     font-size: 100%;
   }
 `
 
-const Hexagon = ({ type }) => (
-  <Wrapper>
-    <InnerWrapper>
-      <h3>{type}</h3>
-    </InnerWrapper>
-  </Wrapper>
-)
+class Hexagon extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isCompleted: false }
+    this.onClick = this.onClick.bind(this)
+  }
+
+  onClick() {
+    this.setState({ isCompleted: true })
+  }
+
+  render() {
+    const { isCompleted } = this.state
+    const { type } = this.props
+    return (
+      <Wrapper disabled={isCompleted} onClick={this.onClick} type={type}>
+        <InnerWrapper>
+          <h3>{type}</h3>
+        </InnerWrapper>
+      </Wrapper>
+    )
+  }
+}
 
 export default Hexagon

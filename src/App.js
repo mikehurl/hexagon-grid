@@ -30,7 +30,9 @@ class App extends Component {
         <GlobalStyle />
         <Wrapper>
           {resources.map((resource, index) => (
-            <Hexagon key={index} type={resource.type} />
+            <Hexagon
+              key={index}
+              type={resource.type} />
           ))}
         </Wrapper>
       </Fragment>
