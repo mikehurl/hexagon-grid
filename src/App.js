@@ -20,16 +20,29 @@ const resources = [
   { type: 'Course' },
   { type: 'Book' },
   { type: 'Online Course' },
-  { type: 'Article' }
+  { type: 'Article' },
+  { type: 'Mentor' }
 ]
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.MAX_RESOURCES = 9
+    this.MIN_RESOURCES = 3
+    this.state = ({ resourcesToDisplay: 0 })
+  }
+
+  componentDidMount() {
+    const resourcesToDisplay = Math.floor(Math.random() * this.MAX_RESOURCES) + this.MIN_RESOURCES
+    this.setState({ resourcesToDisplay })
+  }
+
   render() {
     return (
       <Fragment>
         <GlobalStyle />
         <Wrapper>
-          {resources.map((resource, index) => (
+          {resources.slice(0, this.state.resourcesToDisplay).map((resource, index) => (
             <Hexagon
               key={index}
               type={resource.type} />
